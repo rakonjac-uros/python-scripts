@@ -1,5 +1,6 @@
 import sys
 import argparse
+import os
 
 import cv2
 print(cv2.   __version__)
@@ -12,9 +13,9 @@ def extractImages(pathIn, pathOut, wait_ms):
     while success:
         vidcap.set(cv2.CAP_PROP_POS_MSEC,(count*wait_ms))    # added this line 
         success,image = vidcap.read()
-        print ('Read a new frame: ', success)
+        print ('Read a new frame ('+str(count) +'): ' + str(success))
         if success:
-        	cv2.imwrite( pathOut + "frame" + str(count).zfill(4)+ ".png", image)     # save frame as JPEG file
+        	cv2.imwrite( os.path.join(pathOut, "frame" + str(count).zfill(4)+ ".png"), image)     # save frame as JPEG file
         	count = count + 1
         else:
             break
